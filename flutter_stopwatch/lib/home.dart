@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 
 class HomeWidget extends StatefulWidget {
   @override
@@ -53,10 +54,45 @@ class HomeWidgetState extends State<HomeWidget> {
   }
 
   void startStopButtonPressed() {
+    setState(() {
+      if(stopwatch.isRunning) {
+        buttonText = "Start";
+        stopwatch.stop();
+      } else {
+        buttonText = "Stop";
+        stopwatch.start();
+        startTimeOut();
+      }
+    });
+  }
 
+  void startTimeOut() {
+    new Timer(timeout, handleTimeOut);
+  }
+
+  void handleTimeOut() {
+    if(stopwatch.isRunning) {
+      startTimeOut();
+    }
+
+    setState(() {
+      setStopwatchText();
+    });
   }
 
   void resetButtonPressed() {
+      if(stopwatch.isRunning) {
+        startStopButtonPressed();
+      }
 
+      setState(() {
+        stopwatch.reset();
+        setStopwatchText();
+      });
+  }
+
+  void setStopwatchText() {
+    double seconds = stopwatch.elapsedMicroseconds / 1000 % 60;
+    stopwatchText = seconds.toString();
   }
 }
