@@ -92,7 +92,9 @@ class HomeWidgetState extends State<HomeWidget> {
   }
 
   void setStopwatchText() {
-    double seconds = stopwatch.elapsedMicroseconds / 1000 % 60;
-    stopwatchText = seconds.toString();
+    int milliSeconds = (stopwatch.elapsedMicroseconds / 1000 % 1000).floor();
+    int seconds = (stopwatch.elapsedMicroseconds / 1000000 % 60).floor();
+    int minutes = (stopwatch.elapsedMicroseconds / 1000000 / 60 % 60).floor();
+    stopwatchText = minutes.toString() + ":" + seconds.toString() + "." + milliSeconds.toString();
   }
 }
