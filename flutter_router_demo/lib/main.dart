@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'firstpage.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,24 +12,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: _buildBody(),
-    );
-  }
-
-  _buttonClicked() {}
-
-  _buildBody() {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Router demo"),
-      ),
-      body: RaisedButton(
-        child: Text(
-          "I am a text",
-          textDirection: TextDirection.ltr,
-        ),
-        onPressed: _buttonClicked(),
-      ),
+      home: new FirstPage(),
     );
   }
 }
